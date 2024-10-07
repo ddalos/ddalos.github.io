@@ -2,7 +2,7 @@
 <pre>
   pip install fastapi
   pip install uvicorn
-  pip install hypercon
+  pip install hypercorn
 </pre>
 
 ```python
