@@ -5,7 +5,7 @@
   pip install hypercon
 </pre>
 
-'''python
+```python
 
 from fastapi import FastAPI
 
@@ -15,4 +15,4 @@ app = FastAPI()
 
 def root():
 	return {"Hello": "World"}
- '''
+ ```
