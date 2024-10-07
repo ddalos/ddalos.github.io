@@ -16,3 +16,7 @@ app = FastAPI()
 def root():
 	return {"Hello": "World"}
  ```
+
+<pre>
+  uvicorn main:app --reload
+</pre>
