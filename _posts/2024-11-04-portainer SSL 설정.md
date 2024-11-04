@@ -1,35 +1,3 @@
-## gitlab SSL 적용하기
-
-
-2. Local Certificate Authority (CA) 생성 및 인증서 서명
-로컬 CA를 생성하여 자체 서명된 인증서보다 안전하게 설정할 수 있습니다. 로컬 네트워크에 설치된 다른 장치에서도 인증서를 신뢰하도록 설정할 수 있습니다.
-
-CA 키 및 인증서 생성
-로컬 CA 키 및 인증서를 생성합니다.
-
-bash
-코드 복사
-openssl genpkey -algorithm RSA -out /etc/gitlab/ssl/myCA.key
-openssl req -x509 -new -nodes -key /etc/gitlab/ssl/myCA.key -sha256 -days 1024 -out /etc/gitlab/ssl/myCA.crt
-GitLab SSL 키 및 인증서 요청 파일 생성
-
-bash
-코드 복사
-openssl req -new -newkey rsa:2048 -nodes -keyout /etc/gitlab/ssl/gitlab.key -out /etc/gitlab/ssl/gitlab.csr
-CSR 파일을 사용하여 CA로 인증서 서명
-
-bash
-코드 복사
-openssl x509 -req -in /etc/gitlab/ssl/gitlab.csr -CA /etc/gitlab/ssl/myCA.crt -CAkey /etc/gitlab/ssl/myCA.key -CAcreateserial -out /etc/gitlab/ssl/gitlab.crt -days 500 -sha256
-GitLab 설정 파일 수정 및 적용
-위에서 설명한 대로 /etc/gitlab/gitlab.rb 파일을 수정하여 SSL 인증서를 적용합니다.
-
-클라이언트 시스템에서 로컬 CA 신뢰 추가
-각 클라이언트 (PC, 브라우저 등)에서 myCA.crt 파일을 설치하여 신뢰할 수 있도록 설정합니다.
-
-
-
-
 ## Portainer SSL 적용하기
 
 Portainer에서 SSL을 설정하여 HTTPS를 통해 안전하게 접속하려면, SSL 인증서를 준비하고 Portainer 컨테이너에 설정을 추가해야 합니다. 아래는 SSL을 설정하는 주요 방법입니다.
